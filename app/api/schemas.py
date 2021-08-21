@@ -1,4 +1,14 @@
+from typing import Optional
 from pydantic import BaseModel, Field
+
+
+class UserQuery(BaseModel):
+    status: Optional[str]
+    trading_name: Optional[str]
+    cnpj: Optional[int]
+    cpf: Optional[int]
+    partner: Optional[str]
+    email: Optional[str]
 
 
 class UserSchema(BaseModel):

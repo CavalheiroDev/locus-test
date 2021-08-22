@@ -14,8 +14,8 @@ class UserQuery(BaseModel):
 class UserSchema(BaseModel):
     status: str = Field(..., min_length=5)
     trading_name: str = Field(..., min_length=3)
-    cnpj: int = Field(..., min_length=14)
-    cpf: int = Field(..., min_length=11)
+    cnpj: str = Field(..., min_length=14, max_length=14)
+    cpf: str = Field(..., min_length=11, max_length=11)
     partner: str = Field(..., min_length=4)
     email: str = Field(..., min_length=5)
 

@@ -24,7 +24,7 @@ def read_all_users(db: Session = Depends(get_db)):
     users = get_all(db=db)
     if not users:
         return HTTPException(404, 'Nenhum item encontrado.')
-    
+
     return users
 
 

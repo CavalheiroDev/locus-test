@@ -12,7 +12,7 @@ def factory_database():
     fake = Faker('pt_BR')
     db = SessionLocal()
 
-    for _ in range(200):
+    for _ in range(50):
 
         fake_user = User(status=choice(status), trading_name=fake.company(
         ), cnpj="12345678901234", cpf="12345678901", partner=fake.name(), email=fake.email())

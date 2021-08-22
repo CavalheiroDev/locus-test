@@ -3,12 +3,11 @@ from pydantic import BaseModel, Field
 
 
 class UserQuery(BaseModel):
-    status: Optional[str]
-    trading_name: Optional[str]
-    cnpj: Optional[int]
-    cpf: Optional[int]
-    partner: Optional[str]
-    email: Optional[str]
+    status: Optional[str] = None
+    cnpj: Optional[str] = None
+    cpf: Optional[str] = None
+    ordering: Optional[str] = None
+    reverse: Optional[bool] = False
 
 
 class UserSchema(BaseModel):

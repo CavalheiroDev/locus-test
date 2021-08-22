@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.sql.expression import column
 from app.api.models import User
-from app.api.schemas import UserDB, UserQuery, UserSchema
+from app.api.schemas import UserSchema
 
 
 def get_all(db: Session):
-
     return db.query(User).all()
 
 

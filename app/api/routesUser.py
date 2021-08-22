@@ -1,8 +1,7 @@
-from app.api.models import User
 from typing import List
 from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
-from app.api.crud import get_all, post, put, delete, get_pagination
+from app.api.crud import get_all, post, get_pagination
 from app.api.schemas import UserDB, UserQuery, UserSchema
 from app.db import SessionLocal
 

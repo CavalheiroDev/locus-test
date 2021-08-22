@@ -8,6 +8,11 @@ def get_all(db: Session):
     return db.query(User).all()
 
 
+def get_pagination(db: Session, number_page: int, size: int):
+    offset = size * (number_page - 1)
+    return db.query(User).offset(offset).limit(size).all()
+
+
 def post(db: Session, data: UserSchema):
     user = User(data.status, data.trading_name, data.cnpj,
                 data.cpf, data.partner, data.email)

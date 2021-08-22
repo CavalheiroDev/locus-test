@@ -3,7 +3,7 @@ from app.api.models import User
 from app.api.schemas import UserDB, UserQuery, UserSchema
 
 
-def get_all(db: Session, user: UserQuery):
+def get_all(db: Session):
 
     return db.query(User).all()
 

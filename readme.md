@@ -20,6 +20,7 @@ Dentro da pasta do projeto instale as dependencias:
 pip install -r requirements.txt
 ```
 
+
 Agora abra dois terminais, um para rodar a API e outro para rodar o front-end. 
 
 Execute para a API:

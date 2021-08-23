@@ -14,7 +14,7 @@ Para rodar o projeto em sua máquina clone o repositório com:
 git clone https://github.com/CavalheiroDev/locus-test.git
 ```
 
-Dentro da pasta do projeto instale as dependencias:
+Dentro da pasta do projeto instale as dependências:
 
 ```
 pip install -r requirements.txt

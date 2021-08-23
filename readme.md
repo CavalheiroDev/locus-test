@@ -31,10 +31,8 @@ Execute para o front-end:
 * Caso linux:
 ```
 python3 front/manage.py runserver
-
 ```
 * Caso windows:
 ```
 py front\manage.py runserver
-
 ```

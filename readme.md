@@ -1,11 +1,11 @@
 # Locus Custom Software Teste
-Uma aplicação desenvolvida para o teste técnico do processo seletivo da empresa. 
+Uma aplicação desenvolvida para o teste técnico do processo seletivo da empresa Locus Custom Software.
 
 ## Rodando o projeto
 
 ### Requisitos:
 * Certifique-se de que tem o python em sua versão 3 instalado.
-* Tenhas as portas 8080 e 8000 livres em sua máquina.
+* Tenha as portas 8080 e 8000 livres em sua máquina.
 
 
 Para rodar o projeto em sua máquina clone o repositório com:

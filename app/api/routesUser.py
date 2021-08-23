@@ -17,7 +17,7 @@ def get_db():
         db.close()
 
 
-@router.get('/', response_model=List[UserDB], status_code=status.HTTP_200_OK)
+@router.get('/', response_model=List[UserSchema], status_code=status.HTTP_200_OK)
 def read_all_users(db: Session = Depends(get_db)):
 
     users = get_all(db=db)
@@ -27,16 +27,21 @@ def read_all_users(db: Session = Depends(get_db)):
     return users
 
 
-@router.get('/page/{number_page}', response_model=List[UserDB], status_code=status.HTTP_200_OK)
+@router.get('/page/{number_page}', response_model=UserDB, status_code=status.HTTP_200_OK)
 def read_users_pagination(number_page: int, db: Session = Depends(get_db), size: int = 10):
     users = get_pagination(
         db=db, number_page=number_page, size=size)
+    json_response = {
+        'next_page': number_page + 1,
+        'previous_page': number_page - 1,
+        'items': users
+    }
     if not users:
         return HTTPException(404, 'Nenhum item encontrado.')
-    return users
+    return json_response
 
 
-@ router.post('/', response_model=UserDB, status_code=status.HTTP_201_CREATED)
+@router.post('/', response_model=UserSchema, status_code=status.HTTP_201_CREATED)
 def create_user(*, db: Session = Depends(get_db), data: UserSchema):
     user = post(db=db, data=data)
     return user

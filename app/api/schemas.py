@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel, Field
 
 
@@ -11,6 +11,7 @@ class UserQuery(BaseModel):
 
 
 class UserSchema(BaseModel):
+    id: int = Field(...)
     status: str = Field(..., min_length=5)
     trading_name: str = Field(..., min_length=3)
     cnpj: str = Field(..., min_length=14, max_length=14)
@@ -18,9 +19,14 @@ class UserSchema(BaseModel):
     partner: str = Field(..., min_length=4)
     email: str = Field(..., min_length=5)
 
+    class Config:
+        orm_mode = True
 
-class UserDB(UserSchema):
-    id: int
+
+class UserDB(BaseModel):
+    next_page: int
+    previous_page: int
+    items: List[UserSchema]
 
     class Config:
         orm_mode = True

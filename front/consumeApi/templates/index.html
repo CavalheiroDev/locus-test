@@ -30,13 +30,23 @@
             <h2 class="heading-section">Banco Locus</h2>
           </div>
         </div>
-		<div class="row justify-content-start">
-				<ul class="pagination">
-					<li class="page-item"><a class="page-link" href="/{{ previous_page }}">Anterior</a></li>
-					<li class="page-item"><a class="page-link" href="/{{ next_page }}">Próxima</a></li>
-				  </ul>
-		</div>
-		
+        <div class="row justify-content-start">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="/{{ previous_page }}">Anterior</a>
+            </li>
+            {% if previous_page == last_page %}
+            <li class="page-item disabled">
+              <a class="page-link" href="/{{ next_page }}">Próxima</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+              <a class="page-link" href="/{{ next_page }}">Próxima</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+
         <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
@@ -53,43 +63,39 @@
                 </thead>
                 <tbody>
                   {% for user in users %}
-                	<tr class="alert" role="alert">
-						<td>{{user.trading_name}}</td>
-						<td>{{user.partner}}</td>
-						{% if user.status == 'Ativo' %} 
-							<td class="status">
-								<span class="active">{{ user.status }}</span>
-							</td>
-						{% endif %}
+                  <tr class="alert" role="alert">
+                    <td>{{user.trading_name}}</td>
+                    <td>{{user.partner}}</td>
+                    {% if user.status == 'Ativo' %}
+                    <td class="status">
+                      <span class="active">{{ user.status }}</span>
+                    </td>
+                    {% endif %} {% if user.status == 'Esperando documentação' %}
+                    <td class="status" style="white-space: nowrap !important">
+                      <span class="waiting">{{ user.status }}</span>
+                    </td>
+                    {% endif %} {% if user.status == 'Em análise' %}
+                    <td class="status">
+                      <span class="review">{{ user.status }}</span>
+                    </td>
+                    {% endif %} {% if user.status == 'Negado' %}
+                    <td class="status">
+                      <span class="negative">{{ user.status }}</span>
+                    </td>
+                    {% endif %} {% if user.status == 'Cancelado' %}
+                    <td class="status">
+                      <span class="negative">{{ user.status }}</span>
+                    </td>
+                    {% endif %}
 
-						{% if user.status == 'Esperando documentação' %}
-							<td class="status" style="white-space: nowrap !important;">
-								<span class="waiting">{{ user.status }}</span>
-							</td>
-						{% endif %}
-
-						{% if user.status == 'Em análise' %}
-							<td class="status">
-								<span class="review">{{ user.status }}</span>
-							</td>
-						{% endif %}
-
-						{% if user.status == 'Negado' %}
-							<td class="status">
-								<span class="negative">{{ user.status }}</span>
-							</td>
-						{% endif %}
-
-						{% if user.status == 'Cancelado' %}
-							<td class="status">
-								<span class="negative">{{ user.status }}</span>
-							</td>
-						{% endif %}
-
-						<td id="cnpj" style="white-space: nowrap !important;">{{ user.cnpj }}</td>
-						<td id="cpf" style="white-space: nowrap !important;">{{ user.cpf }}</td>
-						<td>{{ user.email }}</td>
-					</tr>
+                    <td id="cnpj" style="white-space: nowrap !important">
+                      {{ user.cnpj }}
+                    </td>
+                    <td id="cpf" style="white-space: nowrap !important">
+                      {{ user.cpf }}
+                    </td>
+                    <td>{{ user.email }}</td>
+                  </tr>
                   {% endfor %}
                 </tbody>
               </table>
@@ -99,6 +105,6 @@
       </div>
     </section>
 
-	<script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>

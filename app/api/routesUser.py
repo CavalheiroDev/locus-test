@@ -29,15 +29,30 @@ def read_all_users(db: Session = Depends(get_db)):
 
 @router.get('/page/{number_page}', response_model=UserDB, status_code=status.HTTP_200_OK)
 def read_users_pagination(number_page: int, db: Session = Depends(get_db), size: int = 10):
-    users = get_pagination(
+    response = get_pagination(
         db=db, number_page=number_page, size=size)
+
+    total_pages = int(response['total_rows']) / 10
+    next_page = number_page + 1 if number_page != total_pages else total_pages
+    previous_page = number_page - 1 if number_page != total_pages else total_pages - 1
+    if not response['users']:
+        json_response = {
+            'total_pages': total_pages,
+            'next_page': next_page,
+            'previous_page': previous_page,
+            'items': response['users'],
+
+        }
+        return json_response
+
     json_response = {
-        'next_page': number_page + 1,
-        'previous_page': number_page - 1,
-        'items': users
+        'total_pages': total_pages,
+        'next_page': next_page,
+        'previous_page': previous_page,
+        'items': response['users'],
+
     }
-    if not users:
-        return HTTPException(404, 'Nenhum item encontrado.')
+
     return json_response
 
 

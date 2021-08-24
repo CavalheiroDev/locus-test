@@ -10,7 +10,9 @@ def get_all(db: Session):
 
 def get_pagination(db: Session, number_page: int, size: int):
     offset = size * (number_page - 1)
-    return db.query(User).offset(offset).limit(size).all()
+    query = db.query(User).offset(offset).limit(size).all()
+    total_rows = db.query(User.id).count()
+    return {'users': query, 'total_rows': total_rows}
 
 
 def post(db: Session, data: UserSchema):

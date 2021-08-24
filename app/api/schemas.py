@@ -24,6 +24,7 @@ class UserSchema(BaseModel):
 
 
 class UserDB(BaseModel):
+    total_pages: int
     next_page: int
     previous_page: int
     items: List[UserSchema]

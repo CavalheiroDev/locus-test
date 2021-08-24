@@ -32,25 +32,17 @@ def read_users_pagination(number_page: int, db: Session = Depends(get_db), size:
     response = get_pagination(
         db=db, number_page=number_page, size=size)
 
-    total_pages = int(response['total_rows']) / 10
-    next_page = number_page + 1 if number_page != total_pages else total_pages
-    previous_page = number_page - 1 if number_page != total_pages else total_pages - 1
-    if not response['users']:
-        json_response = {
-            'total_pages': total_pages,
-            'next_page': next_page,
-            'previous_page': previous_page,
-            'items': response['users'],
+    total_pages = int(response['total_rows']) / size
 
-        }
-        return json_response
+    next_page = number_page + 1 if number_page < total_pages else total_pages
+
+    previous_page = number_page - 1 if number_page <= total_pages else total_pages - 1
 
     json_response = {
         'total_pages': total_pages,
         'next_page': next_page,
         'previous_page': previous_page,
         'items': response['users'],
-
     }
 
     return json_response
